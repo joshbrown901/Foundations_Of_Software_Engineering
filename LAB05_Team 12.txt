@@ -1,0 +1,107 @@
+Team 12:
+
+People:
+1. Joshua Udobang
+2. Holdings Ogon
+3. Mmesomachi Nwachukwu
+4. Okechukwu Okeke
+5. Tenzin Tadin
+
+
+
+
+
+Task 1
+
+
+-Run the container with a mounted directory /data:
+
+     docker run --name container_name -it -v ~/host_local_directory:/data ubuntu:22.04
+     
+-Create a script /app/timestamper.sh with a sufficiently large loop that adds the current timestamp each second into a file within the mounted directory /data:
+
+     1)  mkdir  app
+     2)  echo "for i in \`seq 1 100\`; do sleep 1; echo \$(date) >> /data/log.txt; done" > /app/timestamper.sh
+     3)  chmod +x /app/timestamper.sh
+     
+-Launch the script and detach the container but not exit it. Check the file is growing on the host using watch or tail
+
+     1)  ./app/timestamper.sh &
+     2)  Ctrl+P+Q
+     3)  tail ~/host_local_directory/log.txt
+     
+ 
+ 
+ 
+
+ 
+     
+Task 2
+
+Search a JupyterLab image on Docker Hub. Run a container from the JupyterLab image and connect to JupyterLab through a browser on your local machine
+
+
+     1) docker pull jupyter/datascience-notebook
+
+     2) docker run -p 8888:8888 \
+		   -e JUPYTER_ENABLE_LAB=yes \
+		   -e JUPYTER_TOKEN=fse_group_12 \
+		   --name jupyter \
+		   -d jupyter/datascience-notebook:latest
+           
+     3) Enter http://localhost:8888 in the browser and provide the token (fse_group_12)
+
+
+
+
+
+
+
+Task 3
+ 
+ 
+-Rewrite timestamper.sh such a way it can read seconds of a lifetime as a parameter from the environment variable (see 5):
+
+
+      1) docker stop container_name
+      2) docker container rm container_name
+      3) docker run --name container_name --env lifetime_SECONDS=5 -it -v  ~/host_local_directory:/data ubuntu:22.04
+      4) mkdir  app
+      5) echo "for i in \`seq 1 \$lifetime_SECONDS\`; do sleep 1; echo \$(date) >> /data/log.txt; done" > /app/timestamper.sh
+      6) chmod +x /app/timestamper.sh
+      7) ./app/timestamper.sh &
+
+
+
+
+
+
+Task 4
+
+
+-Rewrite timestamper.sh in such a way that it runs with default lifetime and don’t fail when its environment variable contains a garbage (see 5):
+
+
+      1) docker stop container_name
+      2) docker container rm container_name
+      3) docker run --name container_name  -it -v  ~/host_local_directory:/data ubuntu:22.04
+      4) mkdir  app
+      5) echo "for i in \`seq 1 \${lifetime_SECONDS:=3}\`; do sleep 1; echo \$(date) >> /data/log.txt; done" > /app/timestamper.sh
+      6) chmod +x /app/timestamper.sh
+      7) ./app/timestamper.sh &
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

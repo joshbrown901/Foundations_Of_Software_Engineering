@@ -1,0 +1,201 @@
+Unix-01
+TEAM 12
+- Tenzin Tadin
+- Joshua Udobang 
+- Mmesomachi Nwachukwu
+- Okechukwu Okeke
+- Holdings Olgon 
+
+
+
+1.	sudo apt install figlet
+	figlet hello ubuntu
+	sudo apt remove figlet
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1$ sudo apt install figlet
+[sudo] password for anastasia: 
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  figlet
+0 upgraded, 1 newly installed, 0 to remove and 3 not upgraded.
+Need to get 133 kB of archives.
+After this operation, 752 kB of additional disk space will be used.
+Get:1 http://mirror.docker.ru/ubuntu jammy/universe amd64 figlet amd64 2.2.5-3 [133 kB]
+Fetched 133 kB in 0s (297 kB/s)  
+Selecting previously unselected package figlet.
+(Reading database ... 206043 files and directories currently installed.)
+Preparing to unpack .../figlet_2.2.5-3_amd64.deb ...
+Unpacking figlet (2.2.5-3) ...
+Setting up figlet (2.2.5-3) ...
+update-alternatives: using /usr/bin/figlet-figlet to provide /usr/bin/figlet (figlet) in auto mode
+Processing triggers for man-db (2.10.2-1) ...
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1$ figlet hello ubuntu
+ _          _ _               _                 _         
+| |__   ___| | | ___    _   _| |__  _   _ _ __ | |_ _   _ 
+| '_ \ / _ \ | |/ _ \  | | | | '_ \| | | | '_ \| __| | | |
+| | | |  __/ | | (_) | | |_| | |_) | |_| | | | | |_| |_| |
+|_| |_|\___|_|_|\___/   \__,_|_.__/ \__,_|_| |_|\__|\__,_|
+                                                          
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1$ sudo apt remove figlet
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages will be REMOVED:
+  figlet
+0 upgraded, 0 newly installed, 1 to remove and 3 not upgraded.
+After this operation, 752 kB disk space will be freed.
+Do you want to continue? [Y/n] y
+(Reading database ... 206118 files and directories currently installed.)
+Removing figlet (2.2.5-3) ...
+Processing triggers for man-db (2.10.2-1) ...
+
+2.	touch {1..10}.txt
+	tree
+	for i in {4..6} ; do unlink "$i".txt ; done
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1$ mkdir foo
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1$ cd foo/
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/foo$ touch {1..10}.txt
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/foo$ ls
+1.txt  10.txt  2.txt  3.txt  4.txt  5.txt  6.txt  7.txt  8.txt  9.txt
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/foo$ tree
+.
+├── 1.txt
+├── 10.txt
+├── 2.txt
+├── 3.txt
+├── 4.txt
+├── 5.txt
+├── 6.txt
+├── 7.txt
+├── 8.txt
+└── 9.txt
+
+0 directories, 10 files
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/foo$ for i in {4..6} ; do unlink "$i".txt ; done
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/foo$ ls
+1.txt  10.txt  2.txt  3.txt  7.txt  8.txt  9.txt
+
+
+3.	ls -la > contents.txt
+
+tenzin@DESKTOP-V1LOLR5:~/HW1$ ls -la > contents.txt
+tenzin@DESKTOP-V1LOLR5:~/HW1$ cat contents.txt
+total 8
+drwxr-xr-x  2 tenzin tenzin 4096 Oct 15 17:59 .
+drwxr-x--- 19 tenzin tenzin 4096 Oct 15 17:58 ..
+-rw-r--r--  1 tenzin tenzin    0 Oct  9 02:36 1.txt
+-rw-r--r--  1 tenzin tenzin    0 Oct  9 02:36 10.txt
+-rw-r--r--  1 tenzin tenzin    0 Oct  9 02:36 2.txt
+-rw-r--r--  1 tenzin tenzin    0 Oct  9 02:36 3.txt
+-rw-r--r--  1 tenzin tenzin    0 Oct  9 02:36 7.txt
+-rw-r--r--  1 tenzin tenzin    0 Oct  9 02:36 8.txt
+-rw-r--r--  1 tenzin tenzin    0 Oct  9 02:36 9.txt
+-rw-r--r--  1 tenzin tenzin    0 Oct 15 17:59 contents.txt
+
+4.	find /usr/share/ -type f -name "test" | wc -l
+
+tenzin@DESKTOP-V1LOLR5:~/HW1$ find /usr/share -type f -name "test" | wc -l
+0
+
+5.	sort /etc/passwd > foo.txt 2> err.txt
+
+tenzin@DESKTOP-V1LOLR5:~/HW1$ cat /etc/passwd | sort -d > foo.txt 2> err.txt              tenzin@DESKTOP-V1LOLR5:~/HW1$ cat foo.txt                                                 _apt:x:100:65534::/nonexistent:/usr/sbin/nologin                                     backup:x:34:34:backup:/var/backups:/usr/sbin/nologin                                 bin:x:2:2:bin:/bin:/usr/sbin/nologin                                                 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin                                      games:x:5:60:games:/usr/games:/usr/sbin/nologin                                      gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin    irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin                                        
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin                        lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin                                         mail:x:8:8:mail:/var/mail:/usr/sbin/nologin                                          man:x:6:12:man:/var/cache/man:/usr/sbin/nologin                                      news:x:9:9:news:/var/spool/news:/usr/sbin/nologin                                    nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin                           proxy:x:13:13:proxy:/bin:/usr/sbin/nologin                                           root:x:0:0:root:/root:/bin/bash                                                      sync:x:4:65534:sync:/bin:/bin/sync                                                   sys:x:3:3:sys:/dev:/usr/sbin/nologin                                                 uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin                                  www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin                                 
+tenzin@DESKTOP-V1LOLR5:~/HW1$ cat err.txt
+
+
+6.	mkdir Box
+	chown :users Box
+	chmod g+s Box
+	chmod 1770 Box
+	{1 - Ensure users can only delete their own files within the firectory
+	7 - gives full permission for the owner (the user who created the directory)
+	0 - revokes permissions for others(users who are not the owners or users in the group)}
+
+tenzin@DESKTOP-V1LOLR5:~/HW1$ mkdir Box
+tenzin@DESKTOP-V1LOLR5:~/HW1$ chown :users Box
+chown: changing group of 'Box': Operation not permitted
+tenzin@DESKTOP-V1LOLR5:~/HW1$ sudo chown :users Box
+[sudo] password for tenzin:
+tenzin@DESKTOP-V1LOLR5:~/HW1$ chmod g+s Box
+tenzin@DESKTOP-V1LOLR5:~/HW1$ chmod 1770 Box
+tenzin@DESKTOP-V1LOLR5:~/HW1$ ls -la Box
+total 8
+drwxrwx--T 2 tenzin users  4096 Oct 15 18:07 .
+drwxr-xr-x 3 tenzin tenzin 4096 Oct 15 18:07 ..
+tenzin@DESKTOP-V1LOLR5:~/HW1$ ls -la
+total 20
+drwxrwx--T  2 tenzin users  4096 Oct 15 18:07 Box
+
+7.	unzip practical_1_unix_local_machine_1.zip
+	cd practical_1__unix_local_machine_1
+	find . -maxdepth 1 -type f -name "*.txt" | wc -l
+
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1$ cd practical_1_unix_local_machine_1/
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/practical_1_unix_local_machine_1$ ls
+16384  4096  8192  x.py
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/practical_1_unix_local_machine_1$ find . -maxdepth 1 -type f -name "*.txt" | wc -l
+0
+
+8.	find . -type f -name "00221*.txt"| wc -l
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/practical_1_unix_local_machine_1$ find . -type f -name "00221*.txt" | wc -l
+13
+
+9.	find . -type f -name "*.txt" -exec wc -l {} \;
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/practical_1_unix_local_machine_1$ find . -name "*.txt" -type f -exec cat {} + | wc -l
+2070
+
+
+10.	du -h --max-depth=1 | sort -h
+
+	{'du -h --max-depth=1' - Calculates disk usage of the directories under the current directory
+	sort -h - sorts the results by size in human readable format}
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/practical_1_unix_local_machine_1$ sudo du -h --max-depth=1 | sort -h
+[sudo] password for tenzin:
+60K     ./16384
+60K     ./4096
+108K    ./8192
+
+11.	sudo du -h --max-depth=1 --one-file-system / | grep -v "/sys" | sort -h | tail -n 1
+	{--max-depth=1 - limits the depth to 1, so that it calculates the size of immediate subdirectorites under the root
+	tail -n 1 - select the last (;argest) subdirectory under the root while excluding the /sys directory}
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/practical_1_unix_local_machine_1$ sudo du -h --max-depth=1 --one-file-system / | grep -v "/sys" | sort -h | tail -n 1
+6.8G   
+
+
+12.	sudo du -h --max-depth=1 --one-file-system --exclude=/sys --exclude=/proc --exclude=/dev exclude=/run / | grep -v "^[[:space:]]*0[[:space:]]"
+
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW1/practical_1_unix_local_machine_1$ sudo du -h --max-depth=1 --one-file-system --exclude=/sys --exclude=/proc --exclude=/dev exclude=/run / | grep -v "^[[:space:]]*0[[:space:]]"
+du: cannot access 'exclude=/run': No such file or directory
+4.0K    /srv
+5.0M    /etc
+4.0K    /wslcKBnbn
+4.0K    /media
+24K     /tmp
+4.0K    /wslGdmcPD
+4.0K    /opt
+16K     /lost+found
+4.0K    /wslKNmcdA
+4.0K    /boot
+4.0K    /wsloihnkb
+4.0K    /wslOanHCe
+2.9M    /root
+8.0K    /Docker
+4.0K    /wslOlOIfo
+3.1G    /home
+4.0K    /wslOdicGc
+32K     /snap
+2.6G    /usr
+1.2G    /var
+4.0K    /mnt
+4.0K    /wslGocggP
+6.8G    /

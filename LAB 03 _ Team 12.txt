@@ -1,0 +1,157 @@
+Lab 03. Team 12
+People:
+1. Joshua Udobang
+2. Holdings Ogon
+3. Mmesomachi Nwachukwu
+4. Okechukwu Okeke
+5. Tenzin Tadin
+
+1. Make a new directory with name practice-project
+
+mkdir practice-project
+
+2. Run git init in this directory
+
+git init practice-project
+
+3. Make directory useful_package, and __init__.py inside it
+
+mkdir useful_package
+touch useful_package/__init__.py
+
+4. Add and commit changes to a master branch
+
+git checkout -b master
+git add useful_package/__init__.py
+git commit -m "add useful_package/__init__.py"
+
+5. Create and checkout a folder module_a_dev
+
+git checkout -b module_a_dev 
+
+6. Create a file module_a.py under it
+
+cd module_a_dev 
+touch module_a.py
+
+7. Add to module_a.py a function polynom_3 that returns some cubic expression of X^3
+
+nano module_a.py
+def polynom_3(x):
+    return x ** 3
+Ctrl+O; Ctrl+X
+cd ..
+
+8. Add import of polynom_3 to a useful_package/__init__.py
+
+echo “from module_a import polynom_3” >> __init__.py
+
+9. Add and commit changes to a module_a_dev branch.
+
+git add .
+git commit -m “Upd: useful_package directory” 
+
+10. Checkout on master
+
+git checkout master
+
+11. Create and checkout on module_b_dev
+
+git checkout -b module_b_dev
+
+12. Create a file module_b.py under useful_package directory
+
+touch ./useful_package/module_b.py 
+
+13. Add to module_b.py a function hyperbola that returns some hyperbola of X (with known definition area)
+
+nano ./useful_package/module_b.py 
+	def hyperbola(X):
+	    return X**2 + X + 1
+Ctrl + O
+Ctrl + X
+
+14. Add import of hyperbola to a useful_package/__init__.py
+
+echo “from .module_b import hyperbola” >> useful_package/__init__.py
+
+15. Add and commit changes to a module_b_dev branch.
+
+git add useful_package
+git commit -m “adding module_b.py and editing __init__.py from module_b_dev”
+
+16. Checkout on master and merge module_a_dev
+
+git checkout master
+git merge module_a_devt
+
+17. Then merge module_b_dev and resolve conflicts (after modification don’t forget to git add )
+
+git merge module_b_dev
+git mergetool –tool=vimdiff3
+
+from .module_a import polynom_3
+from .module_b import hyperbola
+
+git add *
+
+
+18. Checkout on master and hold on
+
+git checkout master
+
+19. Go to github.com, create a new empty repository
+
+Enter in the search field https://github.com/
+Sign in with your login and password or sign up
+Choose your badge in the right upper corner
+Choose “Your repositories”
+Click the green button “New”
+Enter the repository name, add some optional description, a README file and choose the type of the repository (public or private)
+Click the green button “Create repository”
+
+
+20. Add this repository to ours as a remote repository
+
+git remote add new_remote link_to_repository
+
+21. Push to github.com our master branch
+
+git push -u origin master
+
+22. Create a new branch regression-feature
+
+git checkout -b regression-feature
+
+
+23. Create the main.py in the root of our project with a sklearn RandomForestRegressor to approximate
+functions and calculate MSE of the predictions
+a. hyperbola
+b. polynom_3
+
+
+24. Add changes, commit them to regression-feature
+
+git add main.py
+git commit -m "add main.py"
+
+
+25. Push regression-feature to a remote regression-feature and open a pull request on github (to master)
+git push origin regression-feature 
+
+On github.com click the tab “Pull requests”
+
+
+26. Accept pull request (add comments to some lines first) and look at new master
+
+click on “Accept pull request”
+
+27. Return back to our local, remove whole directory and clone it from the github.com
+
+cd ..
+git clone <address> project-clone
+
+
+
+
+

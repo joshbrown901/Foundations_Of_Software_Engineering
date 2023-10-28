@@ -1,0 +1,172 @@
+TEAM 12
+- Tenzin Tadin
+- Joshua Udobang 
+- Mmesomachi Nwachukwu
+- Okechukwu Okeke
+- Holdings Olgon 
+
+
+1.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc$ cat star_pattern.c
+#include <stdio.h>
+int main()
+{
+        int i,j;
+        for (i=0; i<5; i++)
+        {
+                for (j=0; j<=i; j++)
+                {
+                        printf("*");
+                }
+        printf("\n");
+        }
+}
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc$ gcc star_pattern.c -o star_pattern
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc$ ls
+star_pattern  star_pattern.c
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc$ ./star_pattern
+*
+**
+***
+****
+*****
+
+
+2.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc$ cat compile.sh
+#!/bin/bash
+
+CC=gcc
+CFLAGS=-Wall
+PATTERN=star_pattern
+
+$CC $CFLAGS $PATTERN.c -o $PATTERN
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc$ ./star_pattern
+*
+**
+***
+****
+*****
+
+
+3.	sudo apt-get install -y libcgal-dev libgmp-dev
+./install_cgal-4.14.1.sh
+vi compile.sh
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/FSE2023/HW6/lib"
+g++ voronoi_1.cpp -lgmp -L./lib -lCGAL -o voronoi_1
+
+sh compile.sh
+
+
+4.	LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./lib/ ./voronoi_1
+
+5.	$ vi script.sh
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/task5$ ls
+script.sh
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/task5$ cat script.sh
+#!/bin/bash
+
+file_in="./Graph-Executor/*.cpp"
+outfile="test"
+
+options="-Wextra -Wall -g -std=c++14 -pthread -I ./Graph-Executor"
+g++ ${options} ${file_in} -o ${out_file}
+
+$ sh script.sh
+
+
+6.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc$ cd task6
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task6$ ls
+Makefile%
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task6$ cat Makefile%
+.PHONY:all
+
+CC=gcc
+CFLAGS=-Wall
+
+SRCS=star_pattern.c
+OBJECTS=$(patsubst %.c,%.o,$(SRCS))
+all: main.exe
+
+main.exe: $(OBJECTS)
+        $(CC) $(OBJECTS) -o main.exe
+%.0: %.c
+        $(CC) $^ -c $(CFLAGS)
+
+clean:
+        rm -f *.o main.exe
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc$ ./main.exe
+*
+**
+***
+****
+*****
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc$ make clean
+rm -f *.o main.exe
+
+7.	PHONY: all
+
+CC=gcc
+CFLAGS=-Wall
+
+SRCS=star_pattern.c
+OBJECTS=$(patsubst %.c,%.o,$(SRCS))
+
+all: main.exe
+
+main.exe: $(OBJECTS)
+        $(CC) $(OBJECTS) -o main.exe
+
+${OBJECTS}: ${SRCS}
+        $(CC) $^ -c $(CFLAGS)
+
+clean:
+        rm -f *.o main.exe
+
+8.	PHONY: clean all
+OPTIONS = -Wextra -Wall -g --std=c++14 -pthread -I./Graph-Executor
+cpp_files = $(wildcard Graph-Executor/*.cpp)
+
+all: test_compiled
+
+CC=g++
+
+clear:
+        rm -f *.o
+
+test_compiled: compile_obj
+        ${CC} ${OPTIONS} *.o -o test 
+
+compile_obj: ${cpp_files}
+        ${CC} ${OPTIONS} -c $^
+
+
+9.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task9$ wget https://github.com/CGAL/cgal/archive/refs/tags/v5.3.tar.gz
+--2023-10-20 21:02:00--  https://github.com/CGAL/cgal/archive/refs/tags/v5.3.tar.gz
+Resolving github.com (github.com)... 140.82.121.3
+Connecting to github.com (github.com)|140.82.121.3|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://codeload.github.com/CGAL/cgal/tar.gz/refs/tags/v5.3 [following]
+--2023-10-20 21:02:00--  https://codeload.github.com/CGAL/cgal/tar.gz/refs/tags/v5.3
+Resolving codeload.github.com (codeload.github.com)... 140.82.121.9
+Connecting to codeload.github.com (codeload.github.com)|140.82.121.9|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [application/x-gzip]
+Saving to: ‘v5.3.tar.gz’
+
+v5.3.tar.gz           [     <=>   ] 150.52M   407KB/s    in 5m 48s
+
+2023-10-20 21:07:50 (443 KB/s) - ‘v5.3.tar.gz’ saved [157829850]
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task9$ cd ./cgal-5.3/Mesh_2/demo/Mesh_2/
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task9/cgal-5.3/Mesh_2/demo/Mesh_2$ mkdir build
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task9/cgal-5.3/Mesh_2/demo/Mesh_2$ ls
+CMakeLists.txt  README.txt  build  conform.cpp  data  mesh.cpp
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task9/cgal-5.3/Mesh_2/demo/Mesh_2$ cd build/
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task9/cgal-5.3/Mesh_2/demo/Mesh_2/build$ cmake -DCMAKE_BUILD_TYPE=Release -DCGAL_DIR=../../../ ../..
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task9/cgal-5.3/Mesh_2/demo/Mesh_2/build$ make
+
+tenzin@DESKTOP-V1LOLR5:~/FSE2023/HW6/gcc/task9/cgal-5.3/Mesh_2/demo/Mesh_2/build$ ./mesh_optimization
+
+
+
+

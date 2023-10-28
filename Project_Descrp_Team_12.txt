@@ -1,0 +1,23 @@
+Team_12: QuickSolve
+
+
+
+Name of App: 
+
+	QuickSolve
+
+
+
+Description: 
+
+
+
+	QuickSolve allows users to perform basic arithmetic operations such as addition, subtraction, multiplication, and division. Equipped with a clean interface, it also supports advanced mathematical functions like exponentiation and logarithmic operations making it suitable for a wide range of computational needs.
+
+
+
+Github repository:
+
+Links to an external site.
+
+https://github.com/TenzinTadin/QuickSolve.gitLinks to an external site.

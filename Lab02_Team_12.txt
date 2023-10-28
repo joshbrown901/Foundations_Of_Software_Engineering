@@ -1,0 +1,244 @@
+UNIX -2
+Team 20
+- Tenzin Tadin
+- Joshua Udobang 
+- Mmesomachi Nwachukwu
+- Okechukwu Okeke
+- Holdings Olgon 
+
+
+
+1.	echo "HELLOworld" | sed -E "s/(.*)/\L\1/"
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ echo "HELLOworld" | sed -E "s/(.*)/\L\1/"
+	helloworld
+
+2.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ cat test2.txt
+	hi      danger  hi
+	hi      danger  hi
+	hi      danger  hi
+
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ sed "s/danger/-/g" test2.txt
+	hi      -       hi
+	hi      -       hi
+	hi      -       hi
+
+3.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ sed -E "/danger/ a NEWLINE" test2.txt
+	hi      danger  hi
+	NEWLINE
+	hi      danger  hi
+	NEWLINE
+	hi      danger  hi
+	NEWLINE
+
+4.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ cat test4.txt
+	hi      danger  danger  hate
+	hate    danger  hi      hi
+	danger  hi      hate    hate
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ cat test4.txt | sed -e 	"s/danger/safety/g" -e "s/hate/love/g"
+	hi      safety  safety  love
+	love    safety  hi      hi
+	safety  hi      love    love
+
+5.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ cat test5.txt
+	Hello123Hello
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ sed "s/[0-9]/%/g" 	test5.txt
+	Hello%%%Hello
+
+6.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ tail names_sed.txt
+Governor of Texas       Greg Abbott     Republican      2015
+Governor of Utah        Spencer Cox     Republican      January 4, 2021
+Governor of Vermont     Phil Scott      Republican      January 5, 2017
+Governor of Virginia    Ralph Northam   Democratic      January 10, 2018
+Governor of Washington  Jay Inslee      Democratic      January 16, 2013
+Governor of West Virginia       Jim Justice     Republican      January 16, 2017
+Governor of Wisconsin   Tony Evers      Democratic      2019
+Governor of Wyoming     Mark Gordon     Republican      2019
+Governor of the Northern Mariana Islands        Ralph Torres    Republican      December 29, 2015
+Governor of the U.S. Virgin Islands     Albert Bryan    Democratic      January 7, 2019
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ tail names_sed.txt  | sed -E "s/(.*)\t(.*) (.*)\t(.*)\t(.*)/\1\t\3 \2\t\4\t\5/"
+Governor of Texas       Abbott Greg     Republican      2015
+Governor of Utah        Cox Spencer     Republican      January 4, 2021
+Governor of Vermont     Scott Phil      Republican      January 5, 2017
+Governor of Virginia    Northam Ralph   Democratic      January 10, 2018
+Governor of Washington  Inslee Jay      Democratic      January 16, 2013
+Governor of West Virginia       Justice Jim     Republican      January 16, 2017
+Governor of Wisconsin   Evers Tony      Democratic      2019
+Governor of Wyoming     Gordon Mark     Republican      2019
+Governor of the Northern Mariana Islands        Torres Ralph    Republican      December 29, 2015
+Governor of the U.S. Virgin Islands     Bryan Albert    Democratic      January 7, 2019
+
+7.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ vim check_platform.py
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ cat check_platform.py
+#!/usr/bin/python3
+from platform import system
+def check_platform():
+    if system() == 'Windows':
+        print('Please switch to Linux')
+print('Checking in progrss..')
+check_platform()
+
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ chmod +x check_platform.py
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ./check_platform.py
+Checking in progrss..
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$
+
+8.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ cat check_platform.py
+#!/usr/bin/python3
+import platform
+def check_platform():
+    if platform.system() == 'Windows':
+        print('Please switch to Linux')
+    elif platform.system() == 'Linux':
+        print('Correct platform - Linux')
+
+def check_python_version():
+        pyVer = platform.python_version().split('.')[0]
+        if pyVer == '2':
+            print('Plese, switch to python 3')
+        elif pyVer == '3':
+            print('Correct python version -3')
+
+if __name__ == '__main__':
+    check_platform()
+    check_python_version()
+
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ./check_platform.py
+Correct platform - Linux
+Correct python version -3
+
+9.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ cat process.py
+#!/usr/bin/python3
+from curses.ascii import isdigit
+import typing as tp
+
+while True:
+    try:
+        id, name, age = list(map(str, input().split(",")))
+    except:
+        raise ValueError("Got empty string!")
+    if not id.isdigit():
+        raise ValueError("Enter integer")
+    if int(id)<0:
+        raise ValueError("Expected value greater than 0")
+    if len(name) <2:
+        raise ValueError("Enter proper name")
+    try:
+        age = float(age)
+    except:
+        raise ValueError("Enter proper age")
+    res: str = str(int(id) +2) + "," + (name.lower()).replace(" ","_") + (",")+ str(float(age) *0.5)
+    print(res)
+
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ./process.py
+1,Yuri Gagarin,32.5
+3,yuri_gagarin,16.25
+2,Albert Einstein, 88.3
+4,albert_einstein,44.15
+3,notauser, notanumber
+Traceback (most recent call last):
+  File "/home/tenzin/FSE2023/Unix_2/practical 2/./process.py", line 17, in <module>
+    age = float(age)
+ValueError: could not convert string to float: ' notanumber'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tenzin/FSE2023/Unix_2/practical 2/./process.py", line 19, in <module>
+    raise ValueError("Enter proper age")
+ValueError: Enter proper age
+
+10.	vim check_platform.py
+#!/usr/bin/python3
+
+#from platform import system
+
+#def check_platform():
+    #if system() == 'Windows':
+        #print('Please switch to Linux')
+
+
+#print("Checking in progress..")
+#check_platform()
+
+:wq
+
+11.	--11.txt:--
+
+#!/usr/bin/bash
+
+set -x
+
+sed -i "s/check/inspect/" 11.txt
+—----------
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ chmod +x 11.sh
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ./11.sh
++ sed -i s/check/inspect/ 11.txt
+
+
+12.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ touch file{1..2}.txt && chmod 775 file1.txt && chmod 444 file2.txt
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ls -l
+total 14388
+-rw-r--r-- 1 tenzin tenzin      368 Sep 25  2021 example.sh
+-rw-r--r-- 1 tenzin tenzin      608 Sep 25  2021 example.sh:Zone.Identifier
+-rwxrwxr-x 1 tenzin tenzin        0 Oct 15 17:02 file1.txt
+-r--r--r-- 1 tenzin tenzin        0 Oct 15 17:02 file2.txt
+-rw-r--r-- 1 tenzin tenzin 13570537 Sep 25  2021 journalctl-2021sep.log
+
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ find . -type f -perm 775
+./file1.txt
+
+13.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ mkdir foo bar && touch foo/{0..9}.txt bar/{0..9}.txt
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ls
+bar                         journalctl-2021sep.log:Zone.Identifier  test2.txt
+example.sh                  my_ssh.log                              test4.txt
+example.sh:Zone.Identifier  names_sed.txt                           test5.txt
+file1.txt                   names_sed.txt:Zone.Identifier           testfile_sed.txt
+file2.txt                   newtest.txt                             testfile_sed.txt:Zone.Identifier
+foo                         process.py                              version_checker.py
+journalctl-2021sep.log      test.txt
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ls foo
+0.txt  1.txt  2.txt  3.txt  4.txt  5.txt  6.txt  7.txt  8.txt  9.txt
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ls bar
+0.txt  1.txt  2.txt  3.txt  4.txt  5.txt  6.txt  7.txt  8.txt  9.txt
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ find . -name "[13579].txt" -delete
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ls foo
+0.txt  2.txt  4.txt  6.txt  8.txt
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ls bar
+0.txt  2.txt  4.txt  6.txt  8.txt	
+
+14.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ find . -type f -amin -60
+./file1.txt
+./bar/4.txt
+./bar/8.txt
+./bar/0.txt
+./bar/2.txt
+./bar/6.txt
+./file2.txt
+./process.py
+./foo/4.txt
+./foo/8.txt
+./foo/0.txt
+./foo/2.txt
+./foo/6.txt
+
+15.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ truncate -s 20M file01.txt
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ truncate -s 70M file02.txt
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ truncate -s 120M file03.txt
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ find -type f -size +50M -size -100M
+./file02.txt
+
+
+16.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ ls *.py
+process.py  version_checker.py
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ find . -type f -name "*.py"
+./version_checker.py
+./process.py
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ find . -type f -name "*.py" -exec grep "import" {} \;
+import platform
+from curses.ascii import isdigit
+import typing as tp
+
+
+17.	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ nr_files=$(cat /etc/passwd |wc -l)
+	tenzin@DESKTOP-V1LOLR5:~/FSE2023/Unix_2/practical 2$ echo $nr_files
+	31
